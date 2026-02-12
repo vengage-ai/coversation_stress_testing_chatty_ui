@@ -1,0 +1,2 @@
+{"conversation_id": "chat-aa1d3eb38cbf", "timestamp": "2026-02-12T10:27:06.506660Z", "user_message": null, "ai_response": "Thanks for calling GenAI Center. Are you looking to book a new appointment?", "latency_ms": 0}
+{"conversation_id": "chat-aa1d3eb38cbf", "timestamp": "2026-02-12T10:27:06.822092Z", "user_message": "Yes", "ai_response": "Could you please specify the scan requested by your doctor?", "latency_ms": 251.69}

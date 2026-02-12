@@ -1,0 +1,5 @@
+Conversation ID: chat-aa1d3eb38cbf
+AI: Thanks for calling GenAI Center. Are you looking to book a new appointment?
+User: Yes
+AI: Could you please specify the scan requested by your doctor? (Latency: 251.69ms)
+--------------------
