@@ -1,1 +1,6 @@
 playwright>=1.40.0
+matplotlib
+pandas
+openai
+python-dotenv
+numpy

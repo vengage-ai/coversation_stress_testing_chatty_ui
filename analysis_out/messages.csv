@@ -1,0 +1,28 @@
+conversation_id,timestamp,user_message,user_ui_timestamp,ai_response,ai_ui_timestamp,latency_ms,is_error,is_please_wait
+chat-8fac27828a15,2026-02-13T06:51:09.103008Z,,,Thanks for calling GenAI Center. Are you looking to book a new appointment?,12:21:08 PM,0,False,False
+chat-8fac27828a15,2026-02-13T06:51:09.444907Z,Yes,(Primary ASR)12:21:09 PM,Could you please specify the scan requested by your doctor?,12:21:09 PM,286.34,False,False
+chat-8fac27828a15,2026-02-13T06:51:12.817118Z,cxr,(Primary ASR)12:21:11 PM,You have requested for cxr. Is that correct?,12:21:12 PM,1015.11,False,False
+chat-8fac27828a15,2026-02-13T06:51:17.676632Z,Yes,(Primary ASR)12:21:14 PM,"Of course, today's slots are completely booked. My next available would be tomorrow at 9:00 AM. Will that be fine or do you have another preference?",12:21:17 PM,2982.03,False,False
+chat-8fac27828a15,2026-02-13T06:51:24.464897Z,next week saturday around 1 pm,(Primary ASR)12:21:19 PM,"Certainly, I have 1:00 PM and 1:15 PM available on Saturday, 21 February. Will that work?",12:21:24 PM,5395.23,False,False
+chat-8fac27828a15,2026-02-13T06:51:30.231468Z,1 pm,(Primary ASR)12:21:25 PM,"I understand, just to confirm, you want to book 1:00 PM on Saturday, 21 February, right?",12:21:29 PM,4488.19,False,False
+chat-8fac27828a15,2026-02-13T06:51:38.672637Z,Yes,(Primary ASR)12:21:31 PM,Please spell out the first name of the Patient.,12:21:38 PM,6835.13,False,False
+chat-8fac27828a15,2026-02-13T06:51:44.314600Z,Yes,(Primary ASR)12:21:40 PM,"Sorry, I could not understand. Please spell out the first name of the Patient.",12:21:43 PM,3828.37,False,False
+chat-8fac27828a15,2026-02-13T06:51:50.111280Z,Ojas,(Primary ASR)12:21:46 PM,Please spell out the last name of the Patient.,12:21:49 PM,3991.05,False,False
+chat-8fac27828a15,2026-02-13T06:51:56.052092Z,Dubey,(Primary ASR)12:21:52 PM,What is the patient date of birth?,12:21:55 PM,3862.4,False,False
+chat-8fac27828a15,2026-02-13T06:52:03.661313Z,11111111,(Primary ASR)12:21:58 PM,"Sorry, I did not get it properly. Could you please repeat patient date of birth?",12:22:03 PM,5520.75,False,False
+chat-8fac27828a15,2026-02-13T06:52:10.801121Z,yes,(Primary ASR)12:22:05 PM,HANGUP_CALL,12:22:10 PM,5466.62,False,False
+chat-6853c47f5ace,2026-02-13T06:51:10.514946Z,,,Thanks for calling GenAI Center. Are you looking to book a new appointment?,12:21:10 PM,0,False,False
+chat-6853c47f5ace,2026-02-13T06:51:10.829091Z,Yes,(Primary ASR)12:21:10 PM,Could you please specify the scan requested by your doctor?,12:21:10 PM,252.51,False,False
+chat-6853c47f5ace,2026-02-13T06:51:12.423244Z,cxr,(Primary ASR)12:21:11 PM,You have requested for cxr. Is that correct?,12:21:12 PM,554.61,False,False
+chat-6853c47f5ace,2026-02-13T06:51:15.595273Z,Yes,(Primary ASR)12:21:13 PM,"Of course, today's slots are completely booked. My next available would be tomorrow at 9:00 AM. Will that be fine or do you have another preference?",12:21:15 PM,2123.93,False,False
+chat-6853c47f5ace,2026-02-13T06:51:20.307493Z,next week,(Primary ASR)12:21:16 PM,"I understand, there are many slots available next week, starting on Monday. What time would suit you?",12:21:20 PM,3665.93,False,False
+chat-6853c47f5ace,2026-02-13T06:51:25.532113Z,saturday,(Primary ASR)12:21:21 PM,"Certainly, I have slots at 9:00 AM and 9:15 AM on Saturday. Do either work for you?",12:21:25 PM,4170.32,False,False
+chat-6853c47f5ace,2026-02-13T06:51:30.757796Z,around 1 pm,(Primary ASR)12:21:26 PM,"Of course, I can offer 1:00 PM or 1:15 PM on Saturday. Will that work?",12:21:30 PM,4164.59,False,False
+chat-6853c47f5ace,2026-02-13T06:51:36.378373Z,1 pm,(Primary ASR)12:21:31 PM,"I understand, just to confirm, you want to book 1:00 PM on Saturday, right?",12:21:36 PM,4574.94,False,False
+chat-6853c47f5ace,2026-02-13T06:51:41.418393Z,No Next saturday,(Primary ASR)12:21:37 PM,"Certainly, the only available slots are on Saturday 21 February. Would another day work for you?",12:21:41 PM,3984.99,False,False
+chat-6853c47f5ace,2026-02-13T06:51:49.910552Z,Yes,(Primary ASR)12:21:42 PM,"I can help with that, I have slots on Monday 23 February at 9:00 AM and 9:15 AM. Will either work for you?",12:21:49 PM,7435.96,False,False
+chat-6853c47f5ace,2026-02-13T06:51:55.027727Z,yes,(Primary ASR)12:21:50 PM,Please spell out the first name of the Patient.,12:21:54 PM,4067.8,False,False
+chat-6853c47f5ace,2026-02-13T06:51:59.522556Z,Ojas,(Primary ASR)12:21:56 PM,Please spell out the last name of the Patient.,12:21:59 PM,3447.32,False,False
+chat-6853c47f5ace,2026-02-13T06:52:04.230125Z,Dubey,(Primary ASR)12:22:00 PM,What is the patient date of birth?,12:22:04 PM,3660.02,False,False
+chat-6853c47f5ace,2026-02-13T06:52:10.781321Z,11111111,(Primary ASR)12:22:05 PM,"Sorry, I did not get it properly. Could you please repeat patient date of birth?",12:22:10 PM,5506.66,False,False
+chat-6853c47f5ace,2026-02-13T06:52:17.332354Z,yes,(Primary ASR)12:22:11 PM,Your appointment for cxr is confirmed for   dated 23 February Monday at  9:00 AM . You will receive appointment details along with preparation instructions via SMS. Thanks for calling us.,12:22:17 PM,5505.66,False,False

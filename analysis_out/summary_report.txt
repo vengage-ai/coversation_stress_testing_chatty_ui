@@ -1,0 +1,50 @@
+================================================================================
+DATA ANALYST REPORT - STRESS TEST ANALYSIS
+================================================================================
+Generated: 2026-02-13T12:22:26.186241
+
+GLOBAL SUMMARY
+================================================================================
+Total Conversations: 2
+Total User Messages: 25
+Total AI Messages: 27
+Total Errors (Timeouts): 0
+Total 'Please Wait' Responses: 0
+Total Empty Responses: 0
+
+LATENCY STATISTICS (Global)
+--------------------------------------------------------------------------------
+Average Latency: 3871.46 ms
+Minimum Latency: 252.51 ms
+Maximum Latency: 7435.96 ms
+P50 (Median) Latency: 3991.05 ms
+P95 Latency: 6572.25 ms
+P99 Latency: 7291.76 ms
+
+SLA COMPLIANCE (Target: < 3000ms)
+--------------------------------------------------------------------------------
+✗ P95 Latency: FAIL (6572.25ms >= 3000ms)
+✗ Average Latency: FAIL (3871.46ms >= 3000ms)
+
+PER-CONVERSATION SUMMARY
+================================================================================
+
+Conversation: chat-8fac27828a15
+  Total Messages: 12
+  User Messages: 11
+  AI Messages: 12
+  Errors: 0
+  Success Rate: 100.0%
+  Average Latency: 3970.11 ms
+  P95 Latency: 6177.94 ms
+  Max Latency: 6835.13 ms
+
+Conversation: chat-6853c47f5ace
+  Total Messages: 15
+  User Messages: 14
+  AI Messages: 15
+  Errors: 0
+  Success Rate: 100.0%
+  Average Latency: 3793.95 ms
+  P95 Latency: 6181.91 ms
+  Max Latency: 7435.96 ms

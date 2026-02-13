@@ -1,5 +1,59 @@
-Conversation ID: chat-aa1d3eb38cbf
-AI: Thanks for calling GenAI Center. Are you looking to book a new appointment?
-User: Yes
-AI: Could you please specify the scan requested by your doctor? (Latency: 251.69ms)
---------------------
+Conversation ID: chat-8fac27828a15
+==================================================
+[12:21:08 PM] AI: Thanks for calling GenAI Center. Are you looking to book a new appointment?
+[(Primary ASR)12:21:09 PM] User: Yes
+[12:21:09 PM] AI: Could you please specify the scan requested by your doctor? (Latency: 286.34ms)
+[(Primary ASR)12:21:11 PM] User: cxr
+[12:21:12 PM] AI: You have requested for cxr. Is that correct? (Latency: 1015.11ms)
+[(Primary ASR)12:21:14 PM] User: Yes
+[12:21:17 PM] AI: Of course, today's slots are completely booked. My next available would be tomorrow at 9:00 AM. Will that be fine or do you have another preference? (Latency: 2982.03ms)
+[(Primary ASR)12:21:19 PM] User: next week saturday around 1 pm
+[12:21:24 PM] AI: Certainly, I have 1:00 PM and 1:15 PM available on Saturday, 21 February. Will that work? (Latency: 5395.23ms)
+[(Primary ASR)12:21:25 PM] User: 1 pm
+[12:21:29 PM] AI: I understand, just to confirm, you want to book 1:00 PM on Saturday, 21 February, right? (Latency: 4488.19ms)
+[(Primary ASR)12:21:31 PM] User: Yes
+[12:21:38 PM] AI: Please spell out the first name of the Patient. (Latency: 6835.13ms)
+[12:21:43 PM] AI: Sorry, I could not understand. Please spell out the first name of the Patient. (Latency: 3828.37ms)
+[(Primary ASR)12:21:46 PM] User: Ojas
+[12:21:49 PM] AI: Please spell out the last name of the Patient. (Latency: 3991.05ms)
+[(Primary ASR)12:21:52 PM] User: Dubey
+[12:21:55 PM] AI: What is the patient date of birth? (Latency: 3862.4ms)
+[(Primary ASR)12:21:58 PM] User: 11111111
+[12:22:03 PM] AI: Sorry, I did not get it properly. Could you please repeat patient date of birth? (Latency: 5520.75ms)
+[(Primary ASR)12:22:05 PM] User: yes
+[12:22:10 PM] AI: HANGUP_CALL (Latency: 5466.62ms)
+--------------------------------------------------
+
+Conversation ID: chat-6853c47f5ace
+==================================================
+[12:21:10 PM] AI: Thanks for calling GenAI Center. Are you looking to book a new appointment?
+[(Primary ASR)12:21:10 PM] User: Yes
+[12:21:10 PM] AI: Could you please specify the scan requested by your doctor? (Latency: 252.51ms)
+[(Primary ASR)12:21:11 PM] User: cxr
+[12:21:12 PM] AI: You have requested for cxr. Is that correct? (Latency: 554.61ms)
+[(Primary ASR)12:21:13 PM] User: Yes
+[12:21:15 PM] AI: Of course, today's slots are completely booked. My next available would be tomorrow at 9:00 AM. Will that be fine or do you have another preference? (Latency: 2123.93ms)
+[(Primary ASR)12:21:16 PM] User: next week
+[12:21:20 PM] AI: I understand, there are many slots available next week, starting on Monday. What time would suit you? (Latency: 3665.93ms)
+[(Primary ASR)12:21:21 PM] User: saturday
+[12:21:25 PM] AI: Certainly, I have slots at 9:00 AM and 9:15 AM on Saturday. Do either work for you? (Latency: 4170.32ms)
+[(Primary ASR)12:21:26 PM] User: around 1 pm
+[12:21:30 PM] AI: Of course, I can offer 1:00 PM or 1:15 PM on Saturday. Will that work? (Latency: 4164.59ms)
+[(Primary ASR)12:21:31 PM] User: 1 pm
+[12:21:36 PM] AI: I understand, just to confirm, you want to book 1:00 PM on Saturday, right? (Latency: 4574.94ms)
+[(Primary ASR)12:21:37 PM] User: No Next saturday
+[12:21:41 PM] AI: Certainly, the only available slots are on Saturday 21 February. Would another day work for you? (Latency: 3984.99ms)
+[(Primary ASR)12:21:42 PM] User: Yes
+[12:21:49 PM] AI: I can help with that, I have slots on Monday 23 February at 9:00 AM and 9:15 AM. Will either work for you? (Latency: 7435.96ms)
+[(Primary ASR)12:21:50 PM] User: yes
+[12:21:54 PM] AI: Please spell out the first name of the Patient. (Latency: 4067.8ms)
+[(Primary ASR)12:21:56 PM] User: Ojas
+[12:21:59 PM] AI: Please spell out the last name of the Patient. (Latency: 3447.32ms)
+[(Primary ASR)12:22:00 PM] User: Dubey
+[12:22:04 PM] AI: What is the patient date of birth? (Latency: 3660.02ms)
+[(Primary ASR)12:22:05 PM] User: 11111111
+[12:22:10 PM] AI: Sorry, I did not get it properly. Could you please repeat patient date of birth? (Latency: 5506.66ms)
+[(Primary ASR)12:22:11 PM] User: yes
+[12:22:17 PM] AI: Your appointment for cxr is confirmed for   dated 23 February Monday at  9:00 AM . You will receive appointment details along with preparation instructions via SMS. Thanks for calling us. (Latency: 5505.66ms)
+--------------------------------------------------
+

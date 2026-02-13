@@ -2,14 +2,15 @@ import asyncio
 import os
 import json
 import time
+import sys
 import re
 from datetime import datetime
 from playwright.async_api import async_playwright
 
 # Configuration
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-INPUT_FOLDER = os.path.join(SCRIPT_DIR, "../chatty_testing/input")
-RESULT_FILE = os.path.join(SCRIPT_DIR, "../chatty_testing/result.ndjson")
+INPUT_FOLDER = os.path.join(SCRIPT_DIR, "./input")
+RESULT_FILE = os.path.join(SCRIPT_DIR, "./result.ndjson")
 BASE_URL = "https://chat-staging.vengage.ai/"
 
 # Test Configuration
@@ -86,6 +87,16 @@ async def run_conversation(context, input_file):
             greeting_el = page.locator(".message-bot").last
             greeting_text = await greeting_el.text_content()
             
+            # Extract UI timestamp from the message element
+            ui_timestamp = ""
+            try:
+                timestamp_el = greeting_el.locator(".bot-additional-info")
+                if await timestamp_el.count() > 0:
+                    ui_timestamp = await timestamp_el.text_content()
+                    ui_timestamp = ui_timestamp.strip()
+            except:
+                pass
+            
             # Strip "AI:" prefix if present (it's already in the HTML)
             greeting_text = greeting_text.strip()
             if greeting_text.startswith("AI:"):
@@ -98,8 +109,10 @@ async def run_conversation(context, input_file):
             log_entry = {
                 "conversation_id": conversation_id,
                 "timestamp": datetime.utcnow().isoformat() + "Z",
-                "user_message": None, 
+                "user_message": None,
+                "user_ui_timestamp": None,
                 "ai_response": greeting_text,
+                "ai_ui_timestamp": ui_timestamp,
                 "latency_ms": 0
             }
             with open(RESULT_FILE, "a", encoding="utf-8") as rf:
@@ -137,7 +150,7 @@ async def run_conversation(context, input_file):
             # Record start time for latency
             start_time = time.time()
             
-            # Response Wait Loop (Handle "PLEASE WAIT")
+            # Response Wait Loop (Handle "PLEASE WAIT" and empty responses)
             final_response_text = ""
             while True:
                 # Wait for response (up to 45s)
@@ -155,6 +168,16 @@ async def run_conversation(context, input_file):
                 last_ai_message = page.locator(".message-bot").last
                 response_text = await last_ai_message.text_content()
                 
+                # Extract UI timestamp from AI message
+                ai_ui_timestamp = ""
+                try:
+                    timestamp_el = last_ai_message.locator(".bot-additional-info")
+                    if await timestamp_el.count() > 0:
+                        ai_ui_timestamp = await timestamp_el.text_content()
+                        ai_ui_timestamp = ai_ui_timestamp.strip()
+                except:
+                    pass
+                
                 # Strip "AI:" prefix if present
                 response_text = response_text.strip()
                 if response_text.startswith("AI:"):
@@ -162,6 +185,15 @@ async def run_conversation(context, input_file):
                 
                 # Remove timestamp at the end (e.g., "3:40:45 PM")
                 response_text = re.sub(r'\d{1,2}:\d{2}:\d{2}\s*[AP]M\s*$', '', response_text).strip()
+                
+                # Check for empty response (just "AI: " with no content)
+                if not response_text or response_text == "":
+                    print(f"[{conversation_id}] Empty AI response detected. Waiting for valid response...")
+                    # Update count to current total, so we wait for the *next* new one
+                    current_ai_count = await ai_messages_locator.count()
+                    # Small delay to avoid tight loop
+                    await asyncio.sleep(0.5)
+                    continue
                 
                 # Check for "PLEASE WAIT"
                 if "PLEASE WAIT" in response_text:
@@ -171,8 +203,10 @@ async def run_conversation(context, input_file):
                     log_entry = {
                         "conversation_id": conversation_id,
                         "timestamp": datetime.utcnow().isoformat() + "Z",
-                        "user_message": user_message if not final_response_text else None, 
+                        "user_message": user_message if not final_response_text else None,
+                        "user_ui_timestamp": None,
                         "ai_response": response_text.strip(),
+                        "ai_ui_timestamp": ai_ui_timestamp,
                         "latency_ms": round((time.time() - start_time) * 1000, 2)
                     }
                     with open(RESULT_FILE, "a", encoding="utf-8") as rf:
@@ -199,12 +233,28 @@ async def run_conversation(context, input_file):
             
             print(f"[{conversation_id}] Received: {response_text[:50]}... ({latency_ms:.0f}ms)")
             
+            # Capture user message UI timestamp
+            user_ui_timestamp = ""
+            try:
+                # Find the last user message element
+                user_messages = page.locator(".message-user")
+                if await user_messages.count() > 0:
+                    last_user_msg = user_messages.last
+                    timestamp_el = last_user_msg.locator(".user-additional-info")
+                    if await timestamp_el.count() > 0:
+                        user_ui_timestamp = await timestamp_el.text_content()
+                        user_ui_timestamp = user_ui_timestamp.strip()
+            except:
+                pass
+            
             # Log result
             log_entry = {
                 "conversation_id": conversation_id,
                 "timestamp": datetime.utcnow().isoformat() + "Z",
-                "user_message": user_message, 
+                "user_message": user_message,
+                "user_ui_timestamp": user_ui_timestamp,
                 "ai_response": response_text.strip(),
+                "ai_ui_timestamp": ai_ui_timestamp,
                 "latency_ms": round(latency_ms, 2)
             }
             
@@ -244,10 +294,11 @@ def generate_report():
             except:
                 continue
     
-    report_path = os.path.join(SCRIPT_DIR, "../chatty_testing/result.txt")
+    report_path = os.path.join(SCRIPT_DIR, "result.txt")
     with open(report_path, "w", encoding="utf-8") as f:
         for cid, entries in conversations.items():
             f.write(f"Conversation ID: {cid}\n")
+            f.write("=" * 50 + "\n")
             
             # Sort individual entries by timestamp just in case
             entries.sort(key=lambda x: x["timestamp"])
@@ -256,26 +307,26 @@ def generate_report():
             
             for entry in entries:
                 u_msg = entry.get("user_message")
+                u_ui_ts = entry.get("user_ui_timestamp", "")
                 ai_msg = entry.get("ai_response")
+                ai_ui_ts = entry.get("ai_ui_timestamp", "")
                 lat = entry.get("latency_ms")
-                
-                # Cleaning up AI response (removing timestamp div if captured in text)
-                # Text content often includes hidden divs. 
-                # .message-bot includes .bot-additional-info which has time.
-                # We might want to clean it up for the report, but raw capture is safest for now.
                 
                 # Check if this is a greeting (User message might be None or empty)
                 if not u_msg and ai_msg:
-                     f.write(f"AI: {ai_msg}\n")
-                     continue
+                    ts_display = f"[{ai_ui_ts}] " if ai_ui_ts else ""
+                    f.write(f"{ts_display}AI: {ai_msg}\n")
+                    continue
 
                 if u_msg and u_msg != last_user_msg:
-                    f.write(f"User: {u_msg}\n")
+                    ts_display = f"[{u_ui_ts}] " if u_ui_ts else ""
+                    f.write(f"{ts_display}User: {u_msg}\n")
                     last_user_msg = u_msg
                 
-                f.write(f"AI: {ai_msg} (Latency: {lat}ms)\n")
+                ts_display = f"[{ai_ui_ts}] " if ai_ui_ts else ""
+                f.write(f"{ts_display}AI: {ai_msg} (Latency: {lat}ms)\n")
             
-            f.write("-" * 20 + "\n")
+            f.write("-" * 50 + "\n\n")
     
     print(f"Report generated: {report_path}")
 
@@ -315,17 +366,45 @@ async def main():
         
         # Generate report immediately after conversations complete
         generate_report()
-        
+
         # Keep browser open for manual inspection
         print("\n=== All conversations complete. Browser remains open for inspection. ===")
-        print("Press Ctrl+C to close the browser and exit.")
-        
-        # Wait indefinitely until user manually closes
+        print("Type 'exit' and press Enter to close the browser and exit (or Ctrl+C).")
+
+        # Create an event that will be set when user types 'exit'
+        stop_event = asyncio.Event()
+
+        async def _stdin_monitor(event: asyncio.Event):
+            loop = asyncio.get_running_loop()
+            while not event.is_set():
+                try:
+                    line = await loop.run_in_executor(None, sys.stdin.readline)
+                except Exception:
+                    await asyncio.sleep(0.1)
+                    continue
+
+                if not line:
+                    await asyncio.sleep(0.1)
+                    continue
+
+                if line.strip().lower() == "exit":
+                    print("Exit command received. Closing browser...")
+                    event.set()
+                    break
+
+        stdin_task = asyncio.create_task(_stdin_monitor(stop_event))
+
         try:
-            await asyncio.Event().wait()
+            await stop_event.wait()
         except KeyboardInterrupt:
-            print("\nClosing browser...")
-            await browser.close()
+            print("\nKeyboard interrupt received. Closing browser...")
+            stop_event.set()
+        finally:
+            stdin_task.cancel()
+            try:
+                await browser.close()
+            except Exception:
+                pass
     
     print("Stress test completed.")
 
