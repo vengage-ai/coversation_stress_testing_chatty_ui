@@ -4,6 +4,7 @@ import json
 import time
 import sys
 import re
+import random
 from datetime import datetime
 from playwright.async_api import async_playwright
 
@@ -16,7 +17,6 @@ BASE_URL = "https://chat-staging.vengage.ai/"
 # Test Configuration
 CENTER_ID = "204"
 CALL_SOURCE = "Mobile"
-CONTACT_NUMBER = "12345678"
 CONVERSATION_TYPE = "Regular booking"
 LANGUAGE = "English (en)"
 
@@ -47,8 +47,10 @@ async def run_conversation(context, input_file):
         # Call Source
         await page.click(f"label:has-text('{CALL_SOURCE}')")
 
-        # Contact Number
-        await page.locator("input[type=text]").nth(1).fill(CONTACT_NUMBER)
+        # Contact Number - Generate a unique 8-digit number
+        unique_contact_number = f"{random.randint(10000000, 99999999)}"
+        await page.locator("input[type=text]").nth(1).fill(unique_contact_number)
+        print(f"[{file_id}] Using contact number: {unique_contact_number}")
 
         # Conversation Type
         await page.click(f"label:has-text('{CONVERSATION_TYPE}')")
@@ -112,6 +114,7 @@ async def run_conversation(context, input_file):
             # Log Greeting
             log_entry = {
                 "conversation_id": conversation_id,
+                "contact_number": unique_contact_number,
                 "timestamp": datetime.utcnow().isoformat() + "Z",
                 "user_message": None,
                 "user_ui_timestamp": None,
@@ -254,6 +257,7 @@ async def run_conversation(context, input_file):
             # Log result
             log_entry = {
                 "conversation_id": conversation_id,
+                "contact_number": unique_contact_number,
                 "timestamp": datetime.utcnow().isoformat() + "Z",
                 "user_message": user_message,
                 "user_ui_timestamp": user_ui_timestamp,
