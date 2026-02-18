@@ -4,7 +4,7 @@
 # This script runs the complete analysis pipeline:
 # 1. Data analysis and visualization generation
 # 2. AI-powered QA engineer report generation
-
+source .venv/bin/activate
 set -e  # Exit on error
 
 echo "=========================================="
