@@ -16,6 +16,7 @@ BASE_URL = "https://chat-staging.vengage.ai/"
 # Test Configuration
 CENTER_ID = "204"
 CALL_SOURCE = "Mobile"
+CONTACT_NUMBER = "12345678"
 CONVERSATION_TYPE = "Regular booking"
 LANGUAGE = "English (en)"
 
@@ -45,6 +46,9 @@ async def run_conversation(context, input_file):
 
         # Call Source
         await page.click(f"label:has-text('{CALL_SOURCE}')")
+
+        # Contact Number
+        await page.locator("input[type=text]").nth(1).fill(CONTACT_NUMBER)
 
         # Conversation Type
         await page.click(f"label:has-text('{CONVERSATION_TYPE}')")
